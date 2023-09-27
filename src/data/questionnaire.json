@@ -1,0 +1,35 @@
+{
+    "questions": [
+      {
+        "questionNo": 1,
+        "question": "What is a synonym for 'happy'?",
+        "options": ["Sad", "Joyful", "Hungry", "Tired"],
+        "correctAnswer": "Joyful"
+      },
+      {
+        "questionNo": 2,
+        "question": "Which verb means 'to move quickly on foot'?",
+        "options": ["Sit", "Eat", "Run", "Sleep"],
+        "correctAnswer": "Run"
+      },
+      {
+        "questionNo": 3,
+        "question": "What is an antonym for 'big'?",
+        "options": ["Small", "Green", "Fast", "Happy"],
+        "correctAnswer": "Small"
+      },
+      {
+        "questionNo": 4,
+        "question": "Which word is a synonym for 'angry'?",
+        "options": ["Nice", "Friendly", "Mad", "Loud"],
+        "correctAnswer": "Mad"
+      },
+      {
+        "questionNo": 5,
+        "question": "Which verb means 'to consume food'?",
+        "options": ["Jump", "Write", "Read", "Eat"],
+        "correctAnswer": "Eat"
+      }
+    ]
+  }
+  

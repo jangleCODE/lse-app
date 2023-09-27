@@ -1,14 +1,16 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import ExploreContainer from '../components/ExploreContainer';
+import QuestionContainer from '../components/QuestionContainer';
 import './Home.css';
 
-const Home: React.FC = () => {
+import questionnaire from '../data/questionnaire.json'; 
+
+const Quiz: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle><a href="/quiz" >LSE - Quiz App</a></IonTitle>
+          <IonTitle>LSE - Quiz App</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -17,10 +19,10 @@ const Home: React.FC = () => {
             <IonTitle size="large">LSE - English Short Quiz</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer />
+        <QuestionContainer data={questionnaire}/>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Quiz;

@@ -1,13 +1,20 @@
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
+import React from 'react';
 import './ExploreContainer.css';
 
 interface ContainerProps { }
 
 const ExploreContainer: React.FC<ContainerProps> = () => {
+  console.log('ExploreContainer')
   return (
-    <div id="container">
-      <strong>Ready to create an app?</strong>
-      <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-    </div>
+    <IonCard>
+      <IonCardHeader>
+        <IonCardTitle>Hello Devs! </IonCardTitle>
+        <IonCardSubtitle>Showcase your expertise by clicking the button below.</IonCardSubtitle>
+      </IonCardHeader>
+
+      <IonButton fill="clear" href="/quiz" color="success">Start</IonButton>
+    </IonCard>
   );
 };
 
