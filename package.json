@@ -46,6 +46,6 @@
     "vite": "^4.3.9",
     "vitest": "^0.32.2"
   },
-  "description": "An Ionic project",
+  "description": "An Ionic React project",
   "homepage": "https://janglecode.github.io/lse-app/"
 }
