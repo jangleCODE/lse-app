@@ -5,12 +5,12 @@ import './Home.css';
 
 import questionnaire from '../data/questionnaire.json'; 
 import courseRecomm from '../data/courseList.json'; 
-const Quiz: React.FC = () => {
+const Results: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle><a href="/home" >LSE - Quiz App</a></IonTitle>
+          <IonTitle><a href="/home" >LSE - Quiz Results</a></IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -25,4 +25,4 @@ const Quiz: React.FC = () => {
   );
 };
 
-export default Quiz;
+export default Results;

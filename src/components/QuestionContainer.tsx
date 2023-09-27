@@ -1,17 +1,16 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonLabel, IonRadio, IonRadioGroup } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, IonThumbnail } from '@ionic/react';
 import React, { useState } from 'react';
 import './Quiz.css';
 import { checkmarkCircleSharp, closeCircleSharp } from 'ionicons/icons';
-interface ContainerProps {
-  data: Array;
-}
 
-const QuestionContainer: React.FC<ContainerProps> = (props) => {
+
+const QuestionContainer = (props: any) => {
   const listOfQuestion = props.data.questions;
+  const listOfCourseRecomm = props.courses.courses;
   const [formData, setFormData] = useState({
     currentQuestion: 1,
     qDetail: props.data.questions.find((item: { questionNo: number; }) => item.questionNo === 1),
-    responses: [],
+    responses: [] as { id: number; answer: string }[],
   });
   
   const [answer, setAnswer] = useState('');
@@ -21,51 +20,42 @@ const QuestionContainer: React.FC<ContainerProps> = (props) => {
   };
 
   const handleAnswer = (qId: number, ans: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      responses: prevData.responses.concat({
-        'id' : qId,
-        'answer' : ans
-      })
-    }));
-    /* setFormData((prevData) => ({
-      ...prevData,
-      responses: {
-        ...prevData.responses,
-        ["questionNo"+qId]: answer,
-      },
-    })); */
-
-    // Move to the next question
-    /* const nextQuestionIndex = questions.findIndex(
-      (question) => question.id === questionNo
-    );
-    if (nextQuestionIndex < questions.length - 1) {
+    const prevAns = formData.responses.find((ansData: {id: number} )=> ansData?.id === formData.currentQuestion);
+    if(prevAns !== undefined){
+      const indx = formData.responses.findIndex((ansData: {id: number} )=> ansData?.id  === formData.currentQuestion);
+      if (formData.responses[indx] !== undefined) {
+        formData.responses[indx].answer = ans;
+      }
+    }else{
       setFormData((prevData) => ({
         ...prevData,
-        currentQuestion: questions[nextQuestionIndex + 1].id,
+        responses: [...prevData.responses, {
+          'id' : qId,
+          'answer' : ans
+        }],
       }));
-    } else {
-      // Handle the case when all questions have been answered
-      // You can navigate to the next step or perform other actions here
-    } */
+    }
   };
 
   const onBtnBack = () => {
-    //let prevAnswer = formData.responses.[idx]
-    //console.log(formData.responses.fin)
-    //setAnswer(formData.responses[f≈])
     if (formData.currentQuestion >= 1) {
       setFormData((prevData) => ({
         ...prevData,
         qDetail: props.data.questions.find((item: { questionNo: number; }) => item.questionNo === formData.currentQuestion - 1),
         currentQuestion: formData.currentQuestion - 1,
       }));
+      const foundResponse = formData.responses.find((ansData: { id: number }) => ansData?.id === formData.currentQuestion - 1);
+      if (foundResponse !== undefined) {
+        setAnswer(foundResponse.answer);
+      }
+      
     }
   }
 
   const onBtnNext = () => {
-    handleAnswer(formData.currentQuestion,answer)
+    if(answer != ''){
+      handleAnswer(formData.currentQuestion,answer)
+    }
 
     if (formData.currentQuestion < listOfQuestion.length) {
       setFormData((prevData) => ({
@@ -73,6 +63,7 @@ const QuestionContainer: React.FC<ContainerProps> = (props) => {
         qDetail: props.data.questions.find((item: { questionNo: number; }) => item.questionNo === formData.currentQuestion + 1),
         currentQuestion: formData.currentQuestion + 1,
       }));
+      setAnswer('')
     }
     else{
       setFormData((prevData) => ({
@@ -97,7 +88,7 @@ const QuestionContainer: React.FC<ContainerProps> = (props) => {
           formData.qDetail.options.map((value: String,index: any) => {
             return(
                 <div key={index}> 
-                  <IonRadio aria-label="option label" value={value} labelPlacement="stacked" alignment="start" /> 
+                  <IonRadio aria-label="option label" value={value} labelPlacement="stacked" alignment="start"/> 
                   <IonLabel>&nbsp; {value}</IonLabel>
                 </div>
             )
@@ -109,25 +100,75 @@ const QuestionContainer: React.FC<ContainerProps> = (props) => {
     )
   }
 
- const qAcard = (data: any) => {
-   return (
-      <>
-        <IonButton key={data.index} color={data.color} fill={data.color === 'medium' ? "outline" : 'solid'}>
-        { data.color !== 'medium' ? <IonIcon slot="start" icon={data.icon}></IonIcon> : ''}
-          &nbsp; {data.val} 
-        </IonButton>
-        <br/>
-      </>
-   )
- }
+  const courseSuggestion = (score:number) => {
+    return (
+      <IonGrid>
+        <IonRow>
+        {
+          listOfCourseRecomm.map((val: { userScore:number; courseTitle: string; courseDescription: string; }) => {
+            if(val.userScore === score){
+              return (
+                <IonCol>
+                <IonCard color="secondary" className="courseCard">
+                <IonCardHeader>
+                  <IonCardTitle>{val.courseTitle}</IonCardTitle>
+                  <IonCardSubtitle>{val.courseDescription}</IonCardSubtitle>
+                </IonCardHeader>
+                <IonButton fill="clear" href="https://testandtrain.com/" target="_blank">Click here to know more.</IonButton>
+                </IonCard>
+                </IonCol>
+              )
+            }
+            
+          })
+        }
+        </IonRow>
+      </IonGrid>
+    );
+  }
+
+  const qAcard = (data: any) => {
+    return (
+        <>
+          <IonButton size="small" key={data.index} color={data.color} fill={data.color === 'medium' ? "outline" : 'solid'}>
+          { data.color !== 'medium' ? <IonIcon slot="start" icon={data.icon}></IonIcon> : ''}
+            &nbsp; {data.val} 
+          </IonButton>
+          <br/>
+        </>
+    )
+  }
 
   const answers = () => {
+    let ctrCorrect = 0;
     return (
       <>
+        {
+          listOfQuestion.map( (qdata: { questionNo: number; correctAnswer: string;}) => {
+            let res = (formData.responses as { answer: string; id: number }[]).find(res => res.id === qdata.questionNo);
+
+            if (res !== undefined) {
+              ctrCorrect = (qdata.correctAnswer === res.answer) ? ctrCorrect + 1 : ctrCorrect;
+            }
+          })
+        }
+        <IonCard>
+          <IonCardHeader>
+          <IonCardSubtitle>Total Correct answers: </IonCardSubtitle>
+          <IonCardTitle>{ctrCorrect} out of 5 questions</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonCardSubtitle>Course recommendation: </IonCardSubtitle>
+            {courseSuggestion(ctrCorrect)}
+          </IonCardContent>
+        </IonCard>
+        
         { 
-          //formData.responses.map((value: {id : number; answer: string},index: any) => {
           listOfQuestion.map( (qdata: { questionNo: number; question: string; correctAnswer: string; options: any}, index: any) => {
-          let res = formData.responses.find((res: any) => res.id === qdata.questionNo)
+          //let res = formData.responses.find((res: any) => res.id === qdata.questionNo)
+          let res = (formData.responses as { answer: string; id: number }[]).find(res => res.id === qdata.questionNo);
+          if (res !== undefined) {
+          let responseAnswer = res.answer;
           let isCorrect = 'incorrect'
           return (
             <IonCard key={index}>
@@ -135,17 +176,16 @@ const QuestionContainer: React.FC<ContainerProps> = (props) => {
                   <IonCardSubtitle>Question #{qdata.questionNo}</IonCardSubtitle>
                   <IonCardTitle>{qdata.question}</IonCardTitle>
                 </IonCardHeader>
-
                 <IonCardContent key={"cc"+index}>
                   {
                     qdata.options.map((val: String,index: any) => {
-                      if((qdata.correctAnswer === val && val === res.answer) || (qdata.correctAnswer === val && val !== res.answer) ){
-                        isCorrect = qdata.correctAnswer === res.answer ? 'correct' : 'incorrect';
+                      if((qdata.correctAnswer === val && val === responseAnswer) || (qdata.correctAnswer === val && val !== responseAnswer) ){
+                        isCorrect = qdata.correctAnswer === responseAnswer ? 'correct' : 'incorrect';
                         return (
                           qAcard({ 'index' :index, 'icon':checkmarkCircleSharp, 'color': 'success',  'val':val  })
                         )
                       }
-                      else if(qdata.correctAnswer !== res.answer && val === res.answer){
+                      else if(qdata.correctAnswer !== responseAnswer && val === responseAnswer){
                         return (
                           qAcard({ 'index' :index, 'icon':closeCircleSharp, 'color': 'danger',  'val':val  })
                         )
@@ -161,7 +201,7 @@ const QuestionContainer: React.FC<ContainerProps> = (props) => {
                 </IonCardContent>
               </IonCard>
           )
-
+          }
           })
         }
       </>
