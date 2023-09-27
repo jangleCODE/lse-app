@@ -5,6 +5,12 @@
     <title>Ionic App</title>
     
     <base href="/" />
+
+    <script>
+      if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+        window.location.href = '/' + window.location.pathname;
+      }
+    </script>
     
     <meta name="color-scheme" content="light dark" />
     <meta
