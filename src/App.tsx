@@ -30,15 +30,15 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
+    <IonReactRouter basename="/lse-app">
       <IonRouterOutlet>
-        <Route exact path="/lse-app/home">
+        <Route exact path="/home">
           <Home />
         </Route>
-        <Route exact path="/lse-app">
-          <Redirect to="/lse-app/home" />
+        <Route exact path="/">
+          <Redirect to="/home" />
         </Route>
-        <Route exact path="/lse-app/quiz">
+        <Route exact path="/quiz">
           <Quiz />
         </Route>
         <Route exact path="/results">
