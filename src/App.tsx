@@ -30,7 +30,7 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter basename="/lse-app">
+    <IonReactRouter basename="/quiz-app-b717c.web.app/">
       <IonRouterOutlet>
         <Route exact path="/">
           <Home />

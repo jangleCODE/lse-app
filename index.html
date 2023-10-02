@@ -22,6 +22,32 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Ionic App" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDcrOa4-AE6yWEiMZXImly4uQXotJholbU",
+        authDomain: "quiz-app-c4be0.firebaseapp.com",
+        projectId: "quiz-app-c4be0",
+        storageBucket: "quiz-app-c4be0.appspot.com",
+        messagingSenderId: "723868872627",
+        appId: "1:723868872627:web:dc27513e3ac5e59de6e5c6",
+        measurementId: "G-H0J59M8C7D"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
   </head>
   <body>
     <div id="root"></div>
