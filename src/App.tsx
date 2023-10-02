@@ -32,17 +32,11 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter basename="/lse-app">
       <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Home />
         </Route>
         <Route exact path="/quiz">
           <Quiz />
-        </Route>
-        <Route exact path="/results">
-          <Results />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
