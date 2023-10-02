@@ -2,12 +2,11 @@
   "name": "lse-app",
   "private": true,
   "version": "0.0.1",
-  "homepage": "https://janglecode.github.io/lse-app/",
+  "homepage": "https://janglecode.github.io/lse-app",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test.unit": "vitest",
