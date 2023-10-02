@@ -10,7 +10,7 @@ const Quiz: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle><a href="/home" >LSE - Quiz App</a></IonTitle>
+          <IonTitle><a href="/" >LSE - Quiz App</a></IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

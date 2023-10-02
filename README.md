@@ -9,10 +9,11 @@ This is a sample quiz application, a React.js application built using the Ionic 
 ## Getting Started
 1. Clone the repository:
 git clone https://github.com/jangleCODE/lse-app.git
-2. Install Ionic CLI
-npm install -g @ionic/cli
+2. Run cd lse-app
 3. Run npm install
-4. Run ionic serve
+4. Install Ionic CLI
+npm install -g @ionic/cli
+5. Run ionic serve
 
 ## Project Structure
 /src: Contains the source code of the React.js app.
